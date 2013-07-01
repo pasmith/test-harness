@@ -15,8 +15,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 
-import javax.xml.ws.Response;
-
 import org.junit.Before;
 import org.junit.Test;
 
