@@ -144,6 +144,7 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 	 * @throws Exception
 	 */
 	protected Map<String, Object> getFunctionalTestingParameters() {
+		// TODO lazy load the map
 		if( userId == null || userId.isEmpty() ) {
 			userId = "user";
 		}
