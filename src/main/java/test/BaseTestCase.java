@@ -35,8 +35,7 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 	/**
 	 * data cleansing - some answers include quotes
 	 */
-	protected static final String QUOTE_REPLACEMENT = Matcher
-			.quoteReplacement("\\\"");
+	protected static final String QUOTE_REPLACEMENT = Matcher.quoteReplacement("\\\"");
 
 	// constants for messages displayed from test harness
 	static final String MUST_CONTAIN_SEQUENCE = "the value '%s' must contain the sequence '%s'";
@@ -111,6 +110,11 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 	private static final String BASIC_PERFORMANCE_TESTING_MESSAGE_TEMPLATE = "%s %s %s in %s seconds.";
 
 	/**
+	 * the userId to use in the test
+	 */
+	protected String userId = null;
+	
+	/**
 	 * for thread safety testing
 	 */
 	protected ExecutorService executioners = null;
@@ -140,7 +144,13 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 	 * @throws Exception
 	 */
 	protected Map<String, Object> getFunctionalTestingParameters() {
-		return new HashMap<String, Object>();
+		if( userId == null || userId.isEmpty() ) {
+			userId = "user";
+		}
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put( USER_ID, userId );
+        params.put( NUM_ITEMS, 20 );
+		return params;
 	}
 
 	/**
@@ -155,8 +165,17 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 		final Map<String, Object> params = getFunctionalTestingParameters();
 		params.put(DISABLE_PERFORMANCE_TEST, false);
 		params.put(RESULT_MESSAGE, getPerfTestResultMessage());
+        params.put( NUM_ITEMS, 50 );
 		return params;
 	}
+
+    /**
+     * @return
+     * @throws Exception
+     */
+    protected final String getUser() {
+        return (String) getFunctionalTestingParameters().get( USER_ID );
+    }
 
 	/**
 	 * specify the message to use for performance testing
@@ -201,8 +220,7 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 	 * @return
 	 * @throws Exception
 	 */
-	protected abstract D generateTestData(Map<String, Object> params)
-			throws Exception;
+	protected abstract D generateTestData(Map<String, Object> params) throws Exception;
 
 	/**
 	 * get the component to test
