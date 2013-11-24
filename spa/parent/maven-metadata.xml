@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
   <groupId>spa</groupId>
-  <artifactId>common-utils</artifactId>
+  <artifactId>parent</artifactId>
   <versioning>
     <versions>
       <version>1.0-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20131124214048</lastUpdated>
+    <lastUpdated>20131124214605</lastUpdated>
   </versioning>
 </metadata>
