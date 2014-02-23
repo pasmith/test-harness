@@ -332,7 +332,10 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 		// run the performance test
 		final long start = System.currentTimeMillis();
 		final AtomicInteger counter = new AtomicInteger(0);
-		verifyFunctionality(params, componentUnderTest, testData, counter);
+		int n = random.nextInt( ((Number)params.get( NUM_ITEMS )).intValue() );
+		for( int i=0;i<n;i++ ) {
+			verifyFunctionality(params, componentUnderTest, testData, counter);
+		}
 		setCountsForUser(params, counter.get());
 		final float time = (System.currentTimeMillis() - start) / 1000f;
 		message = String.format((String) result,
@@ -632,11 +635,24 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 	 * @param message
 	 * @param expected
 	 * @param actual
+	 * @param positiveInfinity 
 	 */
 	protected final void assertEquals(final String message,
 			final Object expected, final Object actual) {
 		junitWrapper.assertEquals(message, expected, actual);
 	}
+	
+	/**
+	 * @param message
+	 * @param expected
+	 * @param actual
+	 * @param positiveInfinity 
+	 */
+	protected final void assertEquals(final String message,
+			final double expected, final double actual, double tolerance) {
+		junitWrapper.assertEquals(message, expected, actual, tolerance);
+	}
+
 
 	/**
 	 * @param message

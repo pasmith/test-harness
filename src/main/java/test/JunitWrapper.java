@@ -58,11 +58,23 @@ public class JunitWrapper implements TestFixture {
 	 * @param message
 	 * @param expected
 	 * @param actual
+	 * @param tolerance 
 	 */
 	public final void assertEquals(String message, Object expected, Object actual) {
 		assertionCounter.incrementAndGet();
 		org.junit.Assert.assertEquals(message, expected, actual);
 	}
+	/**
+	 * @param message
+	 * @param expected
+	 * @param actual
+	 * @param tolerance 
+	 */
+	public final void assertEquals(String message, double expected, double actual, double tolerance) {
+		assertionCounter.incrementAndGet();
+		org.junit.Assert.assertEquals(message, expected, actual, tolerance);
+	}
+	
 	/**
 	 * @param message
 	 * @param expected
