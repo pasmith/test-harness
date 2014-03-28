@@ -1,6 +1,6 @@
 package test;
 
-import static assertions.AssertTestHelper.getGlobalAssertionCount;
+import static common.AssertTestHelper.getGlobalAssertionCount;
 import static test.utilities.Utilities.isEmpty;
 
 import java.io.IOException;
@@ -539,6 +539,9 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 			System.out.println();
 		}
 
+		// reset if needed
+		reset();
+
 		// run the thread safety test
 		params = getThreadSafetyTestingParameters();
 		try {
@@ -704,11 +707,8 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 	 * @param noun
 	 * @return
 	 */
-	protected String createPerformanceTestResultMessage(final String verb,
-			final String noun) {
-		final String template = String.format(
-				BASIC_PERFORMANCE_TESTING_MESSAGE_TEMPLATE, verb, "%s", noun,
-				"%s");
+	protected String createPerformanceTestResultMessage(final String verb, final String noun) {
+		final String template = String.format(BASIC_PERFORMANCE_TESTING_MESSAGE_TEMPLATE, verb, "%s", noun, "%s");
 		return String.format(template, "%s", "%.2f");
 	}
 
@@ -720,14 +720,23 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 	 * @param noun
 	 * @return
 	 */
-	protected String createThreadSafetyTestResultMessage(final String verb,
-			final String noun) {
-		final String perfTemplate = String.format(
-				BASIC_PERFORMANCE_TESTING_MESSAGE_TEMPLATE, verb, "%s", noun,
-				"%s");
-		final String threadSafetyTemplate = String.format("%s users %s", "%s",
-				perfTemplate);
+	protected String createThreadSafetyTestResultMessage(final String verb, final String noun) {
+		final String perfTemplate = String.format(BASIC_PERFORMANCE_TESTING_MESSAGE_TEMPLATE, verb, "%s", noun, "%s");
+		final String threadSafetyTemplate = String.format("%s users %s", "%s", perfTemplate);
 		return String.format(threadSafetyTemplate, "%d", "%d", "%.2f");
 	}
 
+	/**
+	 * @return
+	 */
+	public static final boolean isThreadSafetyTest( Thread thread ) {
+		for( StackTraceElement method : thread.getStackTrace() ) {
+			System.out.println( method.getMethodName() );
+			if( method.getMethodName().contains( "verifyThreadSafety" ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }

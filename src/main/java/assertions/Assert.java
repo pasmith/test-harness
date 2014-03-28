@@ -43,10 +43,10 @@ public final class Assert implements TestFixture {
 	private Assert(){}
 
 	// create a counter that can be used to track any assert called.
-	static final AtomicLong global = new AtomicLong();
+	public static final AtomicLong global = new AtomicLong();
 
 	// create a counter that can be used to track anonymous assert calls only.
-	static final AtomicLong anonymous = new AtomicLong();
+	public static final AtomicLong anonymous = new AtomicLong();
 
 	// add named counters
 	static final Map<String,AtomicLong> counters = Collections.synchronizedMap( new HashMap<String,AtomicLong>() );
@@ -110,7 +110,7 @@ public final class Assert implements TestFixture {
 	/**
 	 * convenience method to reset counters. reserved for internal use only.
 	 */
-	static final void reset() {
+	public static final void reset() {
 		global.set( 0l );
 		anonymous.set( 0l );
 		counters.clear();		
