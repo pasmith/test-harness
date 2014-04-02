@@ -438,8 +438,7 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 			try {
 				user.get();
 			} catch (final Throwable e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				fail( e.getMessage(), e );
 			}
 		}
 
