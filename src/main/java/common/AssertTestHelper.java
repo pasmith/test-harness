@@ -1,11 +1,10 @@
 package common;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.atomic.AtomicLong;
 
-import assertions.Assert;
 import test.TestFixture;
+import assertions.Assert;
 
 /**
  * class that lets tests access default scoped members.

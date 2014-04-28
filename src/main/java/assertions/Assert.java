@@ -79,7 +79,7 @@ public final class Assert implements TestFixture {
 	/**
 	 * named counter
 	 * 
-	 * @param counter name
+	 * @param name counter name
 	 * @param condition
 	 */
 	public static void _assert(String name, boolean condition) {

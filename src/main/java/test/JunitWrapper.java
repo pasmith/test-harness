@@ -19,8 +19,8 @@ public class JunitWrapper implements TestFixture {
 	
 	
 	/**
-	 * @param string
-	 * @param empty
+	 * @param message
+	 * @param condition
 	 */
 	public final void assertFalse(String message, boolean condition) {
 		assertionCounter.incrementAndGet();
@@ -28,8 +28,8 @@ public class JunitWrapper implements TestFixture {
 	}
 
 	/**
-	 * @param string
-	 * @param b
+	 * @param message
+	 * @param condition
 	 */
 	public final void assertTrue(String message, boolean condition) {
 		assertionCounter.incrementAndGet();
@@ -37,8 +37,8 @@ public class JunitWrapper implements TestFixture {
 	}
 
 	/**
-	 * @param string
-	 * @param result
+	 * @param message
+	 * @param object
 	 */
 	public final void assertNotNull(String message, Object object) {
 		assertionCounter.incrementAndGet();
@@ -46,8 +46,8 @@ public class JunitWrapper implements TestFixture {
 	}
 
 	/**
-	 * @param string
-	 * @param result
+	 * @param message
+	 * @param object
 	 */
 	public final void assertNull(String message, Object object) {
 		assertionCounter.incrementAndGet();
@@ -58,7 +58,6 @@ public class JunitWrapper implements TestFixture {
 	 * @param message
 	 * @param expected
 	 * @param actual
-	 * @param tolerance 
 	 */
 	public final void assertEquals(String message, Object expected, Object actual) {
 		assertionCounter.incrementAndGet();
@@ -86,7 +85,7 @@ public class JunitWrapper implements TestFixture {
 	}
 	/**
 	 * @param message
-	 * @param expected
+	 * @param unexpected
 	 * @param actual
 	 */
 	protected final void assertNotSame(String message, Object unexpected, Object actual) {
@@ -96,8 +95,7 @@ public class JunitWrapper implements TestFixture {
 	
 	/**
 	 * @param message
-	 * @param expected
-	 * @param actual
+	 * @param thrown
 	 */
 	public final void fail(String message, Throwable...thrown) {
 		assertionCounter.incrementAndGet();
@@ -114,6 +112,9 @@ public class JunitWrapper implements TestFixture {
 		return assertionCounter.get();
 	}
 
+	/**
+	 * 
+	 */
 	public final void resetAssertionCounter() {
 		assertionCounter.set( 0 );
 	}

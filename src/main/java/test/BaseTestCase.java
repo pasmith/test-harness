@@ -139,9 +139,7 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 	/**
 	 * usually empty, but can be used to set up default values
 	 * 
-	 * @param params
 	 * @return
-	 * @throws Exception
 	 */
 	protected Map<String, Object> getFunctionalTestingParameters() {
 		// TODO lazy load the map
@@ -157,9 +155,7 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 	/**
 	 * set things up like the size of a batch for stress testing
 	 * 
-	 * @param params
 	 * @return
-	 * @throws Exception
 	 */
 	protected Map<String, Object> getPerformanceTestingParameters() {
 		// define parameters
@@ -172,7 +168,6 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 
     /**
      * @return
-     * @throws Exception
      */
     protected final String getUser() {
         return (String) getFunctionalTestingParameters().get( USER_ID );
@@ -227,9 +222,7 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 	 * get the component to test
 	 * 
 	 * @return component under test
-	 * @throws IOException
 	 * @throws Exception
-	 * @throws InvalidConfigurationException
 	 */
 	protected abstract C getComponentUnderTest() throws Exception;
 
@@ -607,8 +600,7 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 	 * @param message
 	 * @param condition
 	 */
-	protected final void assertTrue(final String message,
-			final boolean condition) {
+	protected final void assertTrue(final String message, final boolean condition) {
 		junitWrapper.assertTrue(message, condition);
 	}
 
@@ -632,10 +624,8 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 	 * @param message
 	 * @param expected
 	 * @param actual
-	 * @param positiveInfinity 
 	 */
-	protected final void assertEquals(final String message,
-			final Object expected, final Object actual) {
+	protected final void assertEquals(final String message, final Object expected, final Object actual) {
 		junitWrapper.assertEquals(message, expected, actual);
 	}
 	
@@ -643,10 +633,9 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 	 * @param message
 	 * @param expected
 	 * @param actual
-	 * @param positiveInfinity 
+	 * @param tolerance 
 	 */
-	protected final void assertEquals(final String message,
-			final double expected, final double actual, double tolerance) {
+	protected final void assertEquals(final String message, final double expected, final double actual, double tolerance) {
 		junitWrapper.assertEquals(message, expected, actual, tolerance);
 	}
 
@@ -656,8 +645,7 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 	 * @param expected
 	 * @param actual
 	 */
-	protected final void assertSame(final String message,
-			final Object expected, final Object actual) {
+	protected final void assertSame(final String message, final Object expected, final Object actual) {
 		junitWrapper.assertSame(message, expected, actual);
 	}
 
