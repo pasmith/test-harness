@@ -8,13 +8,21 @@
 		<version>1.0</version>
 	</parent>
 
-	<properties>
-		<maven.compiler.source>1.6</maven.compiler.source>
-	</properties>
-	
 	<artifactId>test-harness</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>spa test harness</name>
 
+	<properties>
+		<maven.compiler.source>1.6</maven.compiler.source>
+	</properties>
+	
+	<dependencies>
+		<!-- application dependency -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+	</dependencies>
 </project>
