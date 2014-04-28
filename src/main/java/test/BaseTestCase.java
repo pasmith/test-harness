@@ -306,8 +306,7 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 	/**
 	 * check for bottle necks in component under test
 	 */
-	protected final String verifyPerformance(final Map<String, Object> params,
-			final C componentUnderTest, final D testData) throws Exception {
+	protected final String verifyPerformance(final Map<String, Object> params, final C componentUnderTest) throws Exception {
 		// see if performance testing has been disabled
 		String message = "performance testing has been disabled.";
 		if (disabled(params.get(DISABLE_PERFORMANCE_TEST))) {
@@ -334,7 +333,7 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 		final AtomicInteger counter = new AtomicInteger(0);
 		int n = random.nextInt( ((Number)params.get( NUM_ITEMS )).intValue() );
 		for( int i=0;i<n;i++ ) {
-			verifyFunctionality(params, componentUnderTest, testData, counter);
+			verifyFunctionality(params, componentUnderTest, generateTestData(params), counter);
 		}
 		setCountsForUser(params, counter.get());
 		final float time = (System.currentTimeMillis() - start) / 1000f;
@@ -424,12 +423,9 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 					// add user Id
 					params.put(USER_ID, String.format("user-%d", userNum));
 					params.put(NUMBER_OF_SIMULTANEOUS_USERS, num);
-					// generate a performance data set for this user
-					final D data = generateTestData(params);
 					// run the performance test for this user in parallel to
 					// other users
-					return verifyPerformance(params, getComponentUnderTest(),
-							data);
+					return verifyPerformance(params, getComponentUnderTest());
 				}
 			});
 		}
@@ -522,8 +518,7 @@ public abstract class BaseTestCase<C, D> implements TestFixture {
 			// run the test
 			System.out.println(String.format(STARTING, "performance",
 					getClass().getSimpleName()));
-			verifyPerformance(params, getComponentUnderTest(),
-					generateTestData(params));
+			verifyPerformance(params, getComponentUnderTest());
 
 			// report on the number of new defensive programming assertions that
 			// were evaluated while running tests
