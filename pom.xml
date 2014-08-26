@@ -16,7 +16,7 @@
 	<properties>
 		<maven.compiler.source>1.6</maven.compiler.source>
 	</properties>
-	
+
 	<dependencies>
 		<!-- application dependency -->
 		<dependency>
@@ -25,4 +25,16 @@
 			<version>4.11</version>
 		</dependency>
 	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>SPA maven Repo</id>
+			<url>https://raw.github.com/pasmith/spa/mvn-repo/</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+	
 </project>

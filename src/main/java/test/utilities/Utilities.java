@@ -1,5 +1,6 @@
 package test.utilities;
 
+import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -156,5 +157,6 @@ public final class Utilities implements TestFixture {
         }
         return deleted & file.delete();
     }
+
 
 }

@@ -3,7 +3,6 @@ package test;
 import static common.AssertTestHelper.getGlobalAssertionCount;
 import static test.utilities.Utilities.isEmpty;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
