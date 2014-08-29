@@ -1,0 +1,129 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>spa</groupId>
+	<artifactId>local-deploy</artifactId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+	<name>deploying to local spa repository</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<!-- application dependency -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>1.3.2</version>
+					<executions>
+						<!-- compute index of snapshots directory -->
+						<execution>
+							<id>index-snapshot-repo</id>
+							<goals>
+								<goal>java</goal>
+							</goals>
+							<phase>deploy</phase>
+							<configuration>
+								<arguments>
+									<argument>-r</argument>
+									<argument>/Users/patricksmith/repo/spa/mvn-repo/snapshots</argument>
+									<argument>-i</argument>
+									<argument>/Users/patricksmith/repo/spa/mvn-repo/snapshots/.index</argument>
+									<argument>-d</argument>
+									<argument>/Users/patricksmith/repo/spa/mvn-repo/snapshots/.index</argument>
+									<argument>-n</argument>
+									<argument>c3.internal.snapshots</argument>
+								</arguments>
+							</configuration>
+						</execution>
+						<!-- compute index of release candidate directory -->
+						<execution>
+							<id>index-rc-repo</id>
+							<goals>
+								<goal>java</goal>
+							</goals>
+							<phase>deploy</phase>
+							<configuration>
+								<arguments>
+									<argument>-r</argument>
+									<argument>/Users/patricksmith/repo/spa/mvn-repo/releases</argument>
+									<argument>-i</argument>
+									<argument>/Users/patricksmith/repo/spa/mvn-repo/releases/.index</argument>
+									<argument>-d</argument>
+									<argument>/Users/patricksmith/repo/spa/mvn-repo/releases/.index</argument>
+									<argument>-n</argument>
+									<argument>c3.internal.snapshots</argument>
+								</arguments>
+							</configuration>
+						</execution>
+					</executions>
+					<configuration>
+						<mainClass>org.apache.maven.index.cli.NexusIndexerCli</mainClass>
+						<includePluginDependencies>true</includePluginDependencies>
+						<executableDependency>
+							<groupId>org.apache.maven.indexer</groupId>
+							<artifactId>indexer-cli</artifactId>
+						</executableDependency>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.indexer</groupId>
+							<artifactId>indexer-cli</artifactId>
+							<version>5.1.1</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+
+	</build>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>spa.snapshots</id>
+			<uniqueVersion>true</uniqueVersion>
+			<name>Temporary Staging Repository</name>
+			<url>file:///Users/patricksmith/repo/spa/mvn-repo/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>spa.release-candidates</id>
+			<uniqueVersion>true</uniqueVersion>
+			<name>Temporary Release Candidate Repository</name>
+			<url>file:///Users/patricksmith/repo/spa/mvn-repo/releases</url>
+		</repository>
+	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>spa.snapshots.repo</id>
+			<url>file:///Users/patricksmith/repo/spa/mvn-repo/snapshots</url>
+		</repository>
+		<repository>
+			<id>spa.release.repo</id>
+			<url>file:///Users/patricksmith/repo/spa/mvn-repo/releases</url>
+		</repository>
+	</repositories>
+
+</project>
